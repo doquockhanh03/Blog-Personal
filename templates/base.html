@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__logo"><a href="/">QBlog</a></div>
+      <ul class="navbar__menu">
+        <li class="navbar__item"><a href="/works">Works</a></li>
+        <li class="navbar__item"><a href="/blog">Blog</a></li>
+        <li class="navbar__item"><a href="/contact">Contact</a></li>
+        <div class="navbar__eye-toggle">
+          <i
+            class="fa-solid fa-glasses"
+            id="eye-mode"
+            style="cursor: pointer; color: #232946; font-size: 1.3rem"
+          ></i>
+        </div>
+      </ul>
+    </nav>
+    <header class="hero">
+      <div class="hero_left">
+        <img
+          src="{{ url_for('static', filename='images/avatar.png') }}"
+          alt="Avatar"
+          class="hero__avatar"
+        />
+        <div class="hero__text">
+          <h1 class="hero__title">Hi, I'm Quốc Khánh 👋</h1>
+          <p class="hero__subtitle">
+            C# Developer | Learning AI step by step. Sharing my journey &
+            creations 🌱
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="Recent_posts">
+        <div class="recent_posts__header">
+          <h2>Recent Posts</h2>
+          <a href="/blog" class="recent_posts__viewall">View all</a>
+        </div>
+        <div class="recent_posts__cards">
+          <div class="recent_post__card">
+            <h3>Tao tên là Khánh đẹp trai siêu cấp vip pro</h3>
+            <div class="recent_post__date">2025-08-29</div>
+            <div class="recent_post__tags">
+              <span class="recent_post__tag">test</span>
+            </div>
+            <p class="recent_post__desc">Đây là trang 1 tao test.</p>
+          </div>
+          <div class="recent_post__card">
+            <h3>Vẫn là Khánh đẹp trai siêu cấp vip pro</h3>
+            <div class="recent_post__date">2025-08-28</div>
+            <div class="recent_post__tags">
+              <span class="recent_post__tag recent_post__tag--orange"
+                >test</span
+              >
+            </div>
+            <p class="recent_post__desc">Đây là trang 2 tao test.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="Featured_works">
+        <div class="featured_works__container">
+          <div class="featured_works__main">
+            <h2 class="featured_works__title">Featured Works</h2>
+            <div class="featured_works__list">
+              <!-- Dự án 1 -->
+              <div class="featured_work__item">
+                <img
+                  src="{{ url_for('static', filename='images/project1.jpg') }}"
+                  alt="Project 1"
+                  class="featured_work__image"
+                />
+                <div class="featured_work__content">
+                  <h3 class="featured_work__name">Portfolio Website</h3>
+                  <span class="featured_work__year">2024</span>
+                  <span class="featured_work__category">Web Development</span>
+                  <p class="featured_work__desc">
+                    A personal portfolio website built with Flask and responsive
+                    design.
+                  </p>
+                </div>
+              </div>
+              <!-- ...các dự án khác... -->
+            </div>
+          </div>
+          <div class="featured_works__side">
+            <!-- Để trống, sau này thêm danh sách -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- filepath: e:\Blog_Personal\My_blog\templates\work.html -->
+<footer class="footer">
+  <div class="footer__socials" style="justify-content:center; gap:32px; padding:16px 0;">
+    <a class="footer__link" href="#"><i class="fab fa-facebook-f"></i></a>
+    <a class="footer__link" href="#"><i class="fab fa-instagram"></i></a>
+    <a class="footer__link" href="#"><i class="fab fa-github"></i></a>
+    <a class="footer__link" href="#"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+</footer>
+  </body>
+</html>
+<script>
+  const recentPosts = document.querySelector(".Recent_posts");
+  const featuredWorks = document.querySelector(".Featured_works");
+  const footer = document.querySelector(".footer");
+  const eye = document.getElementById("eye-mode");
+  let isEyeMode = false;
+
+  eye.style.color = "#fff";
+
+  eye.onclick = function () {
+    isEyeMode = !isEyeMode;
+    if (isEyeMode) {
+      recentPosts.classList.add("eye-mode");
+      featuredWorks.classList.add("eye-mode");
+      eye.style.color = "#FFD700";
+    } else {
+      recentPosts.classList.remove("eye-mode");
+      featuredWorks.classList.remove("eye-mode");
+      eye.style.color = "#fff";
+    }
+  };
+</script>

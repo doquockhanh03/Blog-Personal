@@ -1,0 +1,122 @@
+<!-- filepath: e:\Blog_Personal\My_blog\templates\work.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Work - My Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__logo"><a href="/">QBlog</a></div>
+      <ul class="navbar__menu">
+        <li class="navbar__item"><a href="/works" class="active">Works</a></li>
+        <li class="navbar__item"><a href="/blog">Blog</a></li>
+        <li class="navbar__item"><a href="/contact">Contact</a></li>
+        <div class="navbar__eye-toggle">
+          <i
+            class="fa-solid fa-glasses"
+            id="eye-mode"
+            style="cursor: pointer; color: #232946; font-size: 1.3rem"
+          ></i>
+        </div>
+      </ul>
+    </nav>
+
+    <section class="work-section">
+      <h1 class="work-title">Work</h1>
+      <div class="work-list">
+        
+        <div class="work-item">
+          <img src="{{ url_for('static', filename='images/work1.jpg') }}" alt="Designing Dashboards" class="work-img" />
+          <div class="work-content">
+            <div class="work-meta">
+              <span class="work-year">2020</span>
+              <span class="work-category">Dashboard</span>
+            </div>
+            <h3 class="work-name">Designing Dashboards</h3>
+            <div class="work-desc">
+              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+            </div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <img src="{{ url_for('static', filename='images/work2.jpg') }}" alt="Vibrant Portraits of 2020" class="work-img" />
+          <div class="work-content">
+            <div class="work-meta">
+              <span class="work-year">2018</span>
+              <span class="work-category">Illustration</span>
+            </div>
+            <h3 class="work-name">Vibrant Portraits of 2020</h3>
+            <div class="work-desc">
+              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+            </div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <img src="{{ url_for('static', filename='images/work3.jpg') }}" alt="36 Days of Malayalam type" class="work-img" />
+          <div class="work-content">
+            <div class="work-meta">
+              <span class="work-year">2018</span>
+              <span class="work-category">Typography</span>
+            </div>
+            <h3 class="work-name">36 Days of Malayalam type</h3>
+            <div class="work-desc">
+              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+            </div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <img src="{{ url_for('static', filename='images/work4.jpg') }}" alt="Components" class="work-img" />
+          <div class="work-content">
+            <div class="work-meta">
+              <span class="work-year">2018</span>
+              <span class="work-category">Components, Design</span>
+            </div>
+            <h3 class="work-name">Components</h3>
+            <div class="work-desc">
+              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+            </div>
+          </div>
+        </div>
+      </div> <!-- đóng work-list -->
+    </section> <!-- đóng work-section -->
+
+<!-- filepath: e:\Blog_Personal\My_blog\templates\work.html -->
+<footer class="footer">
+  <div class="footer__socials" style="justify-content:center; gap:32px; padding:16px 0;">
+    <a class="footer__link" href="#"><i class="fab fa-facebook-f"></i></a>
+    <a class="footer__link" href="#"><i class="fab fa-instagram"></i></a>
+    <a class="footer__link" href="#"><i class="fab fa-github"></i></a>
+    <a class="footer__link" href="#"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+</footer>
+  </body>
+</html>
+
+<script>
+  const workSection = document.querySelector(".work-section");
+  const footer = document.querySelector(".footer");
+  const eye = document.getElementById("eye-mode");
+  let isEyeMode = false;
+
+  eye.style.color = "#fff";
+
+  eye.onclick = function () {
+    isEyeMode = !isEyeMode;
+    if (isEyeMode) {
+        document.body.classList.add("eye-mode");
+        workSection && workSection.classList.add("eye-mode");
+        eye.style.color = "#FFD700";
+    } else {
+        document.body.classList.remove("eye-mode");
+        workSection && workSection.classList.remove("eye-mode");
+        eye.style.color = "#fff";
+    }
+  };
+</script>
