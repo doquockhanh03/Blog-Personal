@@ -36,8 +36,8 @@ def works_list():
     works = Work.query.order_by(Work.id.desc()).all()
     return render_template('work.html', works=works)
 
-ADMIN_USER = os.getenv('ADMIN_USER')
-ADMIN_PASS = os.getenv('ADMIN_PASS')
+ADMIN_USER = os.getenv('ADMIN_USER', 'admin')
+ADMIN_PASS = os.getenv('ADMIN_PASS', '1')
 
 def login_required(f):
     from functools import wraps
