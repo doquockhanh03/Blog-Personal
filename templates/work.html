@@ -28,63 +28,29 @@
     <section class="work-section">
       <h1 class="work-title">Work</h1>
       <div class="work-list">
-        
-        <div class="work-item">
-          <img src="{{ url_for('static', filename='images/work1.jpg') }}" alt="Designing Dashboards" class="work-img" />
-          <div class="work-content">
-            <div class="work-meta">
-              <span class="work-year">2020</span>
-              <span class="work-category">Dashboard</span>
-            </div>
-            <h3 class="work-name">Designing Dashboards</h3>
-            <div class="work-desc">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-            </div>
-          </div>
+  {% for work in works %}
+    <div class="work-item">
+      {% if work.image %}
+        <img src="{{ work.image }}" alt="{{ work.title }}" class="work-img" />
+      {% else %}
+        <img src="{{ url_for('static', filename='images/default.jpg') }}" alt="No image" class="work-img" />
+      {% endif %}
+      <div class="work-content">
+        <div class="work-meta">
+          <span class="work-year">{{ work.year }}</span>
+          <span class="work-category">{{ work.category }}</span>
         </div>
+        <h3 class="work-name">{{ work.title }}</h3>
+        <div class="work-desc">
+          {{ work.desc }}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p class="text-muted">Chưa có dự án nào được thêm.</p>
+  {% endfor %}
+</div>
 
-        <div class="work-item">
-          <img src="{{ url_for('static', filename='images/work2.jpg') }}" alt="Vibrant Portraits of 2020" class="work-img" />
-          <div class="work-content">
-            <div class="work-meta">
-              <span class="work-year">2018</span>
-              <span class="work-category">Illustration</span>
-            </div>
-            <h3 class="work-name">Vibrant Portraits of 2020</h3>
-            <div class="work-desc">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-            </div>
-          </div>
-        </div>
-
-        <div class="work-item">
-          <img src="{{ url_for('static', filename='images/work3.jpg') }}" alt="36 Days of Malayalam type" class="work-img" />
-          <div class="work-content">
-            <div class="work-meta">
-              <span class="work-year">2018</span>
-              <span class="work-category">Typography</span>
-            </div>
-            <h3 class="work-name">36 Days of Malayalam type</h3>
-            <div class="work-desc">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-            </div>
-          </div>
-        </div>
-
-        <div class="work-item">
-          <img src="{{ url_for('static', filename='images/work4.jpg') }}" alt="Components" class="work-img" />
-          <div class="work-content">
-            <div class="work-meta">
-              <span class="work-year">2018</span>
-              <span class="work-category">Components, Design</span>
-            </div>
-            <h3 class="work-name">Components</h3>
-            <div class="work-desc">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-            </div>
-          </div>
-        </div>
-      </div> <!-- đóng work-list -->
     </section> <!-- đóng work-section -->
 
 <!-- filepath: e:\Blog_Personal\My_blog\templates\work.html -->

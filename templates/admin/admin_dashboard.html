@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .dashboard-container {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .nav-links {
+      margin-top: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h1 class="text-center mb-4">Admin Dashboard</h1>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card text-center p-4">
+          <h4>Total Posts</h4>
+          <p class="display-6 fw-bold text-primary">{{ post_count }}</p>
+          <a href="/admin/posts" class="btn btn-outline-primary">Manage Posts</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card text-center p-4">
+          <h4>Total Works</h4>
+          <p class="display-6 fw-bold text-success">{{ work_count }}</p>
+          <a href="/admin/works" class="btn btn-outline-success">Manage Works</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="/admin/logout" class="btn btn-danger mt-4">Logout</a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
