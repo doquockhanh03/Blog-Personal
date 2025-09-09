@@ -1,12 +1,21 @@
-<!-- filepath: e:\Blog_Personal\My_blog\templates\work.html -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Work - My Blog</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
     <nav class="navbar">
@@ -28,40 +37,43 @@
     <section class="work-section">
       <h1 class="work-title">Work</h1>
       <div class="work-list">
-  {% for work in works %}
-    <div class="work-item">
-      {% if work.image %}
-        <img src="{{ work.image }}" alt="{{ work.title }}" class="work-img" />
-      {% else %}
-        <img src="{{ url_for('static', filename='images/default.jpg') }}" alt="No image" class="work-img" />
-      {% endif %}
-      <div class="work-content">
-        <div class="work-meta">
-          <span class="work-year">{{ work.year }}</span>
-          <span class="work-category">{{ work.category }}</span>
+        {% for work in works %}
+        <div class="work-item">
+          {% if work.image %}
+          <img src="{{ work.image }}" alt="{{ work.title }}" class="work-img" />
+          {% else %}
+          <img
+            src="{{ url_for('static', filename='images/default.jpg') }}"
+            alt="No image"
+            class="work-img"
+          />
+          {% endif %}
+          <div class="work-content">
+            <div class="work-meta">
+              <span class="work-year">{{ work.year }}</span>
+              <span class="work-category">{{ work.category }}</span>
+            </div>
+            <h3 class="work-name">{{ work.title }}</h3>
+            <div class="work-desc">{{ work.desc }}</div>
+          </div>
         </div>
-        <h3 class="work-name">{{ work.title }}</h3>
-        <div class="work-desc">
-          {{ work.desc }}
-        </div>
+        {% else %}
+        <p class="text-muted">Chưa có dự án nào được thêm.</p>
+        {% endfor %}
       </div>
-    </div>
-  {% else %}
-    <p class="text-muted">Chưa có dự án nào được thêm.</p>
-  {% endfor %}
-</div>
+    </section>
 
-    </section> <!-- đóng work-section -->
-
-<!-- filepath: e:\Blog_Personal\My_blog\templates\work.html -->
-<footer class="footer">
-  <div class="footer__socials" style="justify-content:center; gap:32px; padding:16px 0;">
-    <a class="footer__link" href="#"><i class="fab fa-facebook-f"></i></a>
-    <a class="footer__link" href="#"><i class="fab fa-instagram"></i></a>
-    <a class="footer__link" href="#"><i class="fab fa-github"></i></a>
-    <a class="footer__link" href="#"><i class="fab fa-linkedin-in"></i></a>
-  </div>
-</footer>
+    <footer class="footer">
+      <div
+        class="footer__socials"
+        style="justify-content: center; gap: 32px; padding: 16px 0"
+      >
+        <a class="footer__link" href="#"><i class="fab fa-facebook-f"></i></a>
+        <a class="footer__link" href="#"><i class="fab fa-instagram"></i></a>
+        <a class="footer__link" href="#"><i class="fab fa-github"></i></a>
+        <a class="footer__link" href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </footer>
   </body>
 </html>
 
@@ -76,13 +88,13 @@
   eye.onclick = function () {
     isEyeMode = !isEyeMode;
     if (isEyeMode) {
-        document.body.classList.add("eye-mode");
-        workSection && workSection.classList.add("eye-mode");
-        eye.style.color = "#FFD700";
+      document.body.classList.add("eye-mode");
+      workSection && workSection.classList.add("eye-mode");
+      eye.style.color = "#FFD700";
     } else {
-        document.body.classList.remove("eye-mode");
-        workSection && workSection.classList.remove("eye-mode");
-        eye.style.color = "#fff";
+      document.body.classList.remove("eye-mode");
+      workSection && workSection.classList.remove("eye-mode");
+      eye.style.color = "#fff";
     }
   };
 </script>

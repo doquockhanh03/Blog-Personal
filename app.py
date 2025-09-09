@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from models import db, Post, Work
 from dotenv import load_dotenv
 
-# Load biến môi trường từ file .env (nếu có)
 load_dotenv()
 
 app = Flask(__name__)
@@ -13,11 +12,9 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-change-me')
 
 db.init_app(app)
 
-# --- tạo DB nếu chưa có ---
 with app.app_context():
     db.create_all()
 
-# ---------- Public routes ----------
 @app.route('/')
 def home():
     posts = Post.query.order_by(Post.id.desc()).limit(3).all()
@@ -39,7 +36,6 @@ def works_list():
     works = Work.query.order_by(Work.id.desc()).all()
     return render_template('work.html', works=works)
 
-# ---------- Simple Admin Auth ----------
 ADMIN_USER = os.getenv('ADMIN_USER', 'admin')
 ADMIN_PASS = os.getenv('ADMIN_PASS', 'admin')
 
@@ -66,7 +62,6 @@ def admin_logout():
     session.pop('admin', None)
     return redirect(url_for('admin_login'))
 
-# ---------- Admin Dashboard ----------
 @app.route('/admin')
 @login_required
 def admin_index():
@@ -122,7 +117,7 @@ def admin_posts_delete(pid):
     flash('Xóa bài viết thành công!', 'info')
     return redirect(url_for('admin_posts'))
 
-# ---------- Works CRUD ----------
+
 @app.route('/admin/works')
 @login_required
 def admin_works():

@@ -221,7 +221,6 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* Để trống, sau này thêm nội dung */
 }
 .featured_works__title {
   font-size: 2rem;
@@ -593,12 +592,10 @@ body {
   color: #232946 !important;
 }
 
-/* Đổi màu toàn bộ vùng ngoài khi eye-mode */
 body.eye-mode {
   background: #fffbe6 !important;
 }
 
-/* Đảm bảo vùng nội dung cũng đổi màu */
 .blog-list.eye-mode,
 .work-section.eye-mode {
   background: #fffbe6 !important;
