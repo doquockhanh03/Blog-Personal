@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Roadmap - My Blog</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* (copy style from earlier roadmap-card) */
+    .roadmap-section { max-width:1100px; margin:40px auto; padding:0 20px; }
+    .roadmap-title{ text-align:center; font-size:2.2rem; margin-bottom:30px; color:#232946; font-weight:700;}
+    .roadmap-list{ display:grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap:24px;}
+    .roadmap-card{ background:#fff; border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,0.08); padding:18px; }
+    .stage-header { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
+    .stage-progress { width:100%; margin-top:8px; height:10px; border-radius:8px; overflow:hidden; background:#e9ecef;}
+    .stage-progress .bar { height:100%; background:#0d6efd; width:0%; color:#fff; text-align:center; font-size:0.8rem; line-height:10px;}
+    .roadmap-progress { height:8px; background:#e9ecef; border-radius:8px; overflow:hidden; margin-top:10px; }
+    .roadmap-progress .bar { height:100%; background:#198754; width:0%; }
+    .task-row { display:flex; align-items:center; gap:10px; padding:6px 0;}
+    .task-row.checked { text-decoration:line-through; color:#6c757d; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar__logo"><a href="/">QBlog</a></div>
+    <ul class="navbar__menu">
+      <li class="navbar__item"><a href="/works">Works</a></li>
+      <li class="navbar__item"><a href="/blog">Blog</a></li>
+      <li class="navbar__item"><a href="/roadmap" class="active">Roadmap</a></li>
+    </ul>
+  </nav>
+
+  <section class="roadmap-section">
+    <h1 class="roadmap-title">🚀 Lộ trình học tập</h1>
+
+    <div class="roadmap-list">
+      {% for roadmap in roadmaps %}
+      <div class="roadmap-card" id="roadmap-{{ roadmap.id }}">
+        <h2>{{ roadmap.title }}</h2>
+        <p>{{ roadmap.description }}</p>
+
+        <!-- roadmap level progress -->
+        <div class="roadmap-progress" aria-hidden="true">
+          <div id="roadmap-bar-{{ roadmap.id }}" class="bar" style="width: {{ roadmap_progress.get(roadmap.id, 0) }}%;"></div>
+        </div>
+
+        {% for stage in roadmap.stages %}
+        <div class="roadmap-stage" id="stage-{{ stage.id }}" style="margin-top:16px; padding:12px; border-left:4px solid #0d6efd; background:#f9fbfd; border-radius:8px;">
+          <div class="stage-header">
+            <h3 style="margin:0">{{ stage.title }}</h3>
+            <div style="font-size:0.9rem; color:#6c757d">{{ stage_progress.get(stage.id, 0) }}%</div>
+          </div>
+
+          <!-- stage progress -->
+          <div class="stage-progress" aria-hidden="true">
+            <div id="stage-bar-{{ stage.id }}" class="bar" style="width: {{ stage_progress.get(stage.id, 0) }}%;"></div>
+          </div>
+
+          <ul style="list-style:none; padding:8px 0; margin:0;">
+            {% for task in stage.tasks %}
+            <li class="task-row {% if task.is_done %}checked{% endif %}" data-task-id="{{ task.id }}">
+              <input class="task-checkbox" data-task-id="{{ task.id }}" type="checkbox" {% if task.is_done %}checked{% endif %}>
+              <div>{{ task.title }}</div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+<script>
+  // attach event to all checkboxes (works for dynamically loaded items too)
+  document.querySelectorAll('.task-checkbox').forEach(cb => {
+    cb.addEventListener('change', async (e) => {
+      const tid = e.target.dataset.taskId;
+      try {
+        const res = await fetch(`/roadmap/task/${tid}/toggle`, { method: 'POST' });
+        const j = await res.json();
+        if (j.status !== 'ok') { alert('Lỗi server'); return; }
+
+        // update checkbox UI: add/remove checked class on li
+        const li = document.querySelector('li[data-task-id="'+tid+'"]');
+        if (j.is_done) li.classList.add('checked'); else li.classList.remove('checked');
+
+        // update stage progress bar and number
+        const stageBar = document.getElementById('stage-bar-' + j.stage_id);
+        const stageNum = document.querySelector('#stage-' + j.stage_id + ' .stage-header div');
+        if (stageBar) stageBar.style.width = j.stage_progress + '%';
+        if (stageNum) stageNum.textContent = j.stage_progress + '%';
+
+        // update roadmap progress bar
+        const roadBar = document.getElementById('roadmap-bar-' + j.roadmap_id);
+        if (roadBar) roadBar.style.width = j.roadmap_progress + '%';
+      } catch (err) {
+        console.error(err);
+        alert('Lỗi khi cập nhật task (mất kết nối)');
+        // revert checkbox visually if error
+        e.target.checked = !e.target.checked;
+      }
+    });
+  });
+</script>
+</body>
+</html>
